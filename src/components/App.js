@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import List from './List';
 import { connect } from 'react-redux';
+import AddButton from './AddButton';
 
 const styles = {
     board: {
@@ -15,8 +16,13 @@ class App extends Component {
                 <header className='App-header'>Your first board</header>
                 <div style={styles.board}>
                     {lists.map((list) => (
-                        <List title={list.title} cards={list.cards} />
+                        <List
+                            key={list.id}
+                            title={list.title}
+                            cards={list.cards}
+                        />
                     ))}
+                    <AddButton list />
                 </div>
             </div>
         );
