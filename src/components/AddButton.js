@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addList } from '../actions';
 
 const styles = {
     textarea: {
@@ -46,11 +48,27 @@ class AddButton extends React.Component {
                     value={this.state.text}
                     onChange={this.handleInputChange}
                 />
-                {this.state.formOpen ? <button>{buttonText}</button> : ''}
+                {this.state.formOpen ? (
+                    //@ onMouseDown fires before onBlurFunction  :-)
+                    <button onMouseDown={this.handleAddList}>
+                        {buttonText}
+                    </button>
+                ) : (
+                    ''
+                )}
             </div>
         );
     };
 
+    handleAddList = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+        console.log(this.props.dispatch);
+        if (text) {
+            dispatch(addList(text));
+        }
+        return;
+    };
     renderAddButton = () => {
         const { list } = this.props;
         const buttonText = list ? 'Add another list' : 'Add another card';
@@ -68,4 +86,4 @@ class AddButton extends React.Component {
     }
 }
 
-export default AddButton;
+export default connect()(AddButton);
