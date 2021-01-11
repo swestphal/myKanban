@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addList } from '../actions';
+import { addList, addCard } from '../actions';
 
 const styles = {
     textarea: {
@@ -50,7 +50,11 @@ class AddButton extends React.Component {
                 />
                 {this.state.formOpen ? (
                     //@ onMouseDown fires before onBlurFunction  :-)
-                    <button onMouseDown={this.handleAddList}>
+                    <button
+                        onMouseDown={
+                            list ? this.handleAddList : this.handleAddCard
+                        }
+                    >
                         {buttonText}
                     </button>
                 ) : (
@@ -65,10 +69,24 @@ class AddButton extends React.Component {
         const { text } = this.state;
         console.log(this.props.dispatch);
         if (text) {
+            this.setState({ text: '' });
             dispatch(addList(text));
         }
         return;
     };
+
+    handleAddCard = () => {
+        console.log(this.props);
+        const { dispatch, listID } = this.props;
+        const { text } = this.state;
+        console.log(this.props.dispatch);
+        if (text) {
+            this.setState({ text: '' });
+            dispatch(addCard(listID, text));
+        }
+        return;
+    };
+
     renderAddButton = () => {
         const { list } = this.props;
         const buttonText = list ? 'Add another list' : 'Add another card';

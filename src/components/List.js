@@ -18,14 +18,14 @@ const styles = {
     },
 };
 
-const List = ({ title, cards }) => {
+const List = ({ title, cards, listID }) => {
     return (
         <div style={styles.list}>
             <h2 style={styles.heading}>{title}</h2>
             {cards.map((card) => (
                 <Card key={card.id} text={card.text} title={card.title} />
             ))}
-            <AddButton />
+            <AddButton listID={listID} />
         </div>
     );
 };
