@@ -38,8 +38,9 @@ const List = ({ title, cards, listID }) => {
                             title={card.title}
                         />
                     ))}
-                    <AddButton listID={listID} />
+
                     {provided.placeholder}
+                    <AddButton listID={listID} />
                 </div>
             )}
         </Droppable>

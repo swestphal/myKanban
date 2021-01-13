@@ -3,15 +3,28 @@ import List from './List';
 import { connect } from 'react-redux';
 import AddButton from './AddButton';
 import { DragDropContext } from 'react-beautiful-dnd';
-
+import { sort } from '../actions';
 const styles = {
     board: {
         display: 'flex',
     },
 };
 class App extends Component {
-    onDragEnd = () => {
-        //reordering logic
+    onDragEnd = (result) => {
+        const { destination, source, draggableId } = result;
+        if (!destination) {
+            return;
+        }
+
+        this.props.dispatch(
+            sort(
+                source.droppableId,
+                destination.droppableId,
+                source.index,
+                destination.index,
+                draggableId
+            )
+        );
     };
     render() {
         const { lists } = this.props;
@@ -28,6 +41,7 @@ class App extends Component {
                                 cards={list.cards}
                             />
                         ))}
+
                         <AddButton list />
                     </div>
                 </div>
