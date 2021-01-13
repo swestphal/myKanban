@@ -1,7 +1,7 @@
 import React from 'react';
 import AddButton from './AddButton';
 import Card from './Card';
-import { Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 const styles = {
     list: {
@@ -19,31 +19,41 @@ const styles = {
     },
 };
 
-const List = ({ title, cards, listID }) => {
+const List = ({ title, cards, listID, index }) => {
     return (
-        <Droppable droppableId={String(listID)}>
+        <Draggable draggableId={String(listID)} index={index}>
             {(provided) => (
                 <div
-                    {...provided.droppableProps}
+                    {...provided.draggableProps}
                     ref={provided.innerRef}
+                    {...provided.dragHandleProps}
                     style={styles.list}
                 >
-                    <h2 style={styles.heading}>{title}</h2>
-                    {cards.map((card, index) => (
-                        <Card
-                            id={card.id}
-                            key={card.id}
-                            index={index}
-                            text={card.text}
-                            title={card.title}
-                        />
-                    ))}
+                    <Droppable droppableId={String(listID)} type='card'>
+                        {(provided) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                <h2 style={styles.heading}>{title}</h2>
+                                {cards.map((card, index) => (
+                                    <Card
+                                        id={card.id}
+                                        key={card.id}
+                                        index={index}
+                                        text={card.text}
+                                        title={card.title}
+                                    />
+                                ))}
 
-                    {provided.placeholder}
-                    <AddButton listID={listID} />
+                                {provided.placeholder}
+                                <AddButton listID={listID} />
+                            </div>
+                        )}
+                    </Droppable>
                 </div>
             )}
-        </Droppable>
+        </Draggable>
     );
 };
 

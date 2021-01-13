@@ -78,11 +78,21 @@ const listsReducer = (state = initialState, action) => {
                 droppableIndexStart,
                 droppableIndexEnd,
                 draggableId,
+                type,
             } = action.payload;
 
             const newState = [...state];
-            // if same list
+
+            // dragging lists
+
+            if (type === 'list') {
+                console.log('hhkh');
+                const list = newState.splice(droppableIndexStart, 1);
+                newState.splice(droppableIndexEnd, 0, ...list);
+                return newState;
+            }
             if (droppableIdStart === droppableIdEnd) {
+                // if same list
                 const list = state.find((list) => droppableIdStart === list.id);
                 const card = list.cards.splice(droppableIndexStart, 1);
                 list.cards.splice(droppableIndexEnd, 0, ...card);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import List from './List';
 import { connect } from 'react-redux';
 import AddButton from './AddButton';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
 const styles = {
     board: {
@@ -11,7 +11,7 @@ const styles = {
 };
 class App extends Component {
     onDragEnd = (result) => {
-        const { destination, source, draggableId } = result;
+        const { destination, source, draggableId, type } = result;
         if (!destination) {
             return;
         }
@@ -22,7 +22,8 @@ class App extends Component {
                 destination.droppableId,
                 source.index,
                 destination.index,
-                draggableId
+                draggableId,
+                type
             )
         );
     };
@@ -31,19 +32,32 @@ class App extends Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className='App'>
-                    <header className='App-header'>Your first board</header>
-                    <div style={styles.board}>
-                        {lists.map((list) => (
-                            <List
-                                listID={list.id}
-                                key={list.id}
-                                title={list.title}
-                                cards={list.cards}
-                            />
-                        ))}
-
-                        <AddButton list />
-                    </div>
+                    <header className='App-header'>Your boards</header>
+                    <Droppable
+                        droppableId='{0}'
+                        direction='horizontal'
+                        type='list'
+                    >
+                        {(provided) => (
+                            <div
+                                style={styles.board}
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                {lists.map((list, index) => (
+                                    <List
+                                        listID={list.id}
+                                        key={list.id}
+                                        title={list.title}
+                                        cards={list.cards}
+                                        index={index}
+                                    />
+                                ))}
+                                {provided.placeholder}
+                                <AddButton list />
+                            </div>
+                        )}
+                    </Droppable>
                 </div>
             </DragDropContext>
         );

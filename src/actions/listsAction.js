@@ -13,9 +13,9 @@ export const sort = (
     droppableIdEnd,
     droppableIndexStart,
     droppableIndexEnd,
-    draggableId
+    draggableId,
+    type
 ) => {
-    console.log(sort);
     return {
         type: CONSTANTS.DRAG_FINISHED,
         payload: {
@@ -24,6 +24,7 @@ export const sort = (
             droppableIndexStart,
             droppableIndexEnd,
             draggableId,
+            type,
         },
     };
 };
