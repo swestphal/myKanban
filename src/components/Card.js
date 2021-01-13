@@ -1,4 +1,6 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+import { Provider } from 'react-redux';
 
 const styles = {
     card: {
@@ -16,12 +18,22 @@ const styles = {
     },
 };
 
-const Card = ({ title, text }) => {
+const Card = ({ title, text, id, index }) => {
     return (
-        <div style={styles.card}>
-            <h3 style={styles.heading}>{title}</h3>
-            <p>{text}</p>
-        </div>
+        <Draggable draggableId={String(id)} index={index}>
+            {(provided) => (
+                <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <div style={styles.card}>
+                        <h3 style={styles.heading}>{title}</h3>
+                        <p>{text}</p>
+                    </div>
+                </div>
+            )}
+        </Draggable>
     );
 };
 
