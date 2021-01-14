@@ -1,4 +1,3 @@
-import { Droppable } from 'react-beautiful-dnd';
 import { CONSTANTS } from '../actions';
 
 export const addList = (title) => {

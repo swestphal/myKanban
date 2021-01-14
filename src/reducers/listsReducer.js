@@ -84,7 +84,7 @@ const listsReducer = (state = initialState, action) => {
             const newState = [...state];
 
             // dragging lists
-
+            console.log(draggableId);
             if (type === 'list') {
                 const list = newState.splice(droppableIndexStart, 1);
                 newState.splice(droppableIndexEnd, 0, ...list);

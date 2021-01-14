@@ -27,30 +27,31 @@ const List = ({ title, cards, listID, index }) => {
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                     {...provided.dragHandleProps}
-                    style={styles.list}
                 >
-                    <Droppable droppableId={String(listID)} type='card'>
-                        {(provided) => (
-                            <div
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                <h2 style={styles.heading}>{title}</h2>
-                                {cards.map((card, index) => (
-                                    <Card
-                                        id={card.id}
-                                        key={card.id}
-                                        index={index}
-                                        text={card.text}
-                                        title={card.title}
-                                    />
-                                ))}
+                    <div style={styles.list}>
+                        <Droppable droppableId={String(listID)} type='card'>
+                            {(provided) => (
+                                <div
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    <h2 style={styles.heading}>{title}</h2>
+                                    {cards.map((card, index) => (
+                                        <Card
+                                            id={card.id}
+                                            key={card.id}
+                                            index={index}
+                                            text={card.text}
+                                            title={card.title}
+                                        />
+                                    ))}
 
-                                {provided.placeholder}
-                                <AddButton listID={listID} />
-                            </div>
-                        )}
-                    </Droppable>
+                                    {provided.placeholder}
+                                    <AddButton listID={listID} />
+                                </div>
+                            )}
+                        </Droppable>
+                    </div>
                 </div>
             )}
         </Draggable>

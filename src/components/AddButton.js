@@ -67,7 +67,7 @@ class AddButton extends React.Component {
     handleAddList = () => {
         const { dispatch } = this.props;
         const { text } = this.state;
-        console.log(this.props.dispatch);
+
         if (text) {
             this.setState({ text: '' });
             dispatch(addList(text));
@@ -79,7 +79,7 @@ class AddButton extends React.Component {
         console.log(this.props);
         const { dispatch, listID } = this.props;
         const { text } = this.state;
-        console.log(this.props.dispatch);
+
         if (text) {
             this.setState({ text: '' });
             dispatch(addCard(listID, text));

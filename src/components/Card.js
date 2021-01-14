@@ -1,6 +1,5 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { Provider } from 'react-redux';
 
 const styles = {
     card: {

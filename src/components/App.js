@@ -34,7 +34,7 @@ class App extends Component {
                 <div className='App'>
                     <header className='App-header'>Your boards</header>
                     <Droppable
-                        droppableId='{0}'
+                        droppableId='droppable'
                         direction='horizontal'
                         type='list'
                     >
