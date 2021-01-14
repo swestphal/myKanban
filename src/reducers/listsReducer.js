@@ -86,7 +86,6 @@ const listsReducer = (state = initialState, action) => {
             // dragging lists
 
             if (type === 'list') {
-                console.log('hhkh');
                 const list = newState.splice(droppableIndexStart, 1);
                 newState.splice(droppableIndexEnd, 0, ...list);
                 return newState;
