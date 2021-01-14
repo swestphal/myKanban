@@ -1,72 +1,20 @@
-import React, { Component } from 'react';
-import List from './List';
-import { connect } from 'react-redux';
-import AddButton from './AddButton';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { sort } from '../actions';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../store';
 
-const styles = {
-    board: {
-        display: 'flex',
-    },
-};
+import Board from './Board';
+import Dashboard from './Dashboard';
+
 const App = (props) => {
-    const onDragEnd = (result) => {
-        const { destination, source, draggableId, type } = result;
-        if (!destination) {
-            return;
-        }
-
-        props.dispatch(
-            sort(
-                source.droppableId,
-                destination.droppableId,
-                source.index,
-                destination.index,
-                draggableId,
-                type
-            )
-        );
-    };
-
-    const { lists } = props;
-    console.log(props);
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <div className='App'>
-                <header className='App-header'>Your boards</header>
-                <Droppable
-                    droppableId='droppable'
-                    direction='horizontal'
-                    type='list'
-                >
-                    {(provided) => (
-                        <div
-                            style={styles.board}
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                        >
-                            {lists.map((list, index) => (
-                                <List
-                                    listID={list.id}
-                                    key={list.id}
-                                    title={list.title}
-                                    cards={list.cards}
-                                    index={index}
-                                />
-                            ))}
-                            {provided.placeholder}
-                            <AddButton list />
-                        </div>
-                    )}
-                </Droppable>
-            </div>
-        </DragDropContext>
+        <Provider store={store}>
+            <Router>
+                <Route exact path='/' component={Board} />
+                <Route exact path='/dashboard' component={Dashboard} />
+            </Router>
+        </Provider>
     );
 };
 
-const mapStateToProps = (state) => ({
-    lists: state.lists,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;
