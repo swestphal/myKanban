@@ -25,4 +25,8 @@ yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
-client/.eslintcache
+/client/.eslintcache
+
+
+# config 
+/client/config/default.json
