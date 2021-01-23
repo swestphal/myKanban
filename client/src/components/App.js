@@ -10,7 +10,7 @@ import NavBar from './layout/NavBar';
 import { Landing } from './layout/Landing';
 import Register from './auth/Register';
 import Login from './auth/Login';
-import CreateProfile from './profile-forms/CreateProfile';
+import ProfileForm from './profile-forms/ProfileForm';
 import Dashboard from './dashboard/Dashboard';
 import PrivateRoute from './routing/PrivateRoute';
 import Alert from './layout/Alert';
@@ -43,7 +43,12 @@ const App = (props) => {
                             <PrivateRoute
                                 exact
                                 path='/create-profile'
-                                component={CreateProfile}
+                                component={ProfileForm}
+                            />
+                            <PrivateRoute
+                                exact
+                                path='/edit-profile'
+                                component={ProfileForm}
                             />
                             <PrivateRoute
                                 exact

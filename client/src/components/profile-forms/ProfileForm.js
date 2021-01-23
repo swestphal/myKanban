@@ -4,19 +4,35 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../actions';
 
-const EditProfile = ({
+const initialState = {
+    company: '',
+    website: '',
+    location: '',
+    status: '',
+    bio: ''
+}
+const ProfileForm = ({
     profile: { profile, loading },
     createProfile,
     getCurrentProfile,
     history,
 }) => {
     const [formData, setFormData] = useState({
-        company: '',
-        website: '',
-        location: '',
-        status: '',
-        bio: ''
+        initialState
     });
+
+    useEffect(() => {
+        if (!profile) getCurrentProfile();
+        if (!loading && profile) {
+
+            const profileData = { ...initialState };
+            for (const key in profile) {
+                if (key in profileData) profileData[key] = profile[key];
+            }
+
+            setFormData(profileData);
+        }
+    }, [loading, getCurrentProfile, profile])
 
     const {
         company,
@@ -33,7 +49,7 @@ const EditProfile = ({
 
     const onSubmit = (e) => {
         e.preventDefault();
-        createProfile(formData, history);
+        createProfile(formData, history, profile ? true : false);
     };
     return (
         <>
@@ -49,17 +65,14 @@ const EditProfile = ({
                         value={status}
                         onChange={(e) => onChange(e)}
                     >
-                        <option value='0'>* Select Professional Status</option>
-                        <option value='Forever Free'>Forever Free</option>
-                        <option value='Silver'>
-                            Silver
-                        </option>
-                        <option value='Gold'>
-                            Gold
+                        <option value='0'>Select Color Scheme</option>
+                        <option value='dark'>Dark</option>
+                        <option value='bright'>
+                            Bright
                         </option>
                     </select>
                     <small className='form-text'>
-                        Your Membership
+                        Your Color Scheme
                     </small>
                 </div>
                 <div className='form-group'>
@@ -123,15 +136,16 @@ const EditProfile = ({
     );
 };
 
-CreateProfile.propTypes = {
+ProfileForm.propTypes = {
     createProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
 };
-mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
     profile: state.profile,
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-    withRouter(EditProfile)
-);
+export default connect(
+    mapStateToProps,
+    { createProfile, getCurrentProfile })
+    (ProfileForm);

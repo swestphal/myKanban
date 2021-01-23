@@ -9,6 +9,12 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <li>
             <ul>
                 <li>
+                    <Link to='/board'>
+                        <i className='fas fa-user' />
+                        <span className='hide-sm'>Your Kanban Board</span>
+                    </Link>
+                </li>
+                <li>
                     <Link to='/dashboard'>
                         <i className='fas fa-user' />
                         <span className='hide-sm'>Dashboard</span>

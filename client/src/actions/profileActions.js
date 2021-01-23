@@ -9,6 +9,7 @@ export const getCurrentProfile = () => async (dispatch) => {
             type: CONSTANTS.GET_POFILE,
             payload: res.data,
         });
+
     } catch (err) {
         console.log('error', err);
         dispatch({
@@ -25,6 +26,7 @@ export const createProfile = (formData, history, edit = false) => async (
     dispatch
 ) => {
     try {
+
         const config = { headers: { 'Content-Type': 'application/json' } };
 
         const res = await axios.post('/api/profile', formData, config);
