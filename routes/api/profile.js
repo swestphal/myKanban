@@ -44,7 +44,7 @@ router.post(
     auth,
     [
         check('status', 'Status is required').not().isEmpty(),
-        check('skills', 'Skills is required').not().isEmpty(),
+
     ],
 
     async (req, res) => {
@@ -59,10 +59,7 @@ router.post(
             location,
             bio,
             status,
-            githubusername,
-            skills,
-            youtube,
-            facebook,
+
             // spread the rest, we don't need check
             ...rest
         } = req.body;
@@ -77,16 +74,14 @@ router.post(
         if (location) profileFields.location = location;
         if (bio) profileFields.bio = bio;
         if (status) profileFields.status = status;
-        if (githubusername) profileFields.githubusername = githubusername;
-        if (skills) {
+
+        /*if (skills) {
             profileFields.skills = skills
                 .split(',')
                 .map((skill) => skill.trim());
-        }
+        }*/
 
-        profileFields.social = {};
-        if (youtube) profileFields.social.youtube = youtube;
-        if (facebook) profileFields.social.facebook = facebook;
+
 
         try {
             let profile = await Profile.findOne({ user: req.user.id });
