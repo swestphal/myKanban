@@ -3,8 +3,12 @@ import listsReducer from './listsReducer';
 import alertsReducer from './alertsReducer';
 import authReducer from './authReducer';
 import profileReducer from './profileReducer';
+import themeReducer from './themeReducer';
 
 export default combineReducers({
+    // Theming
+    theme: themeReducer,
+
     // Boardlists
     lists: listsReducer,
 

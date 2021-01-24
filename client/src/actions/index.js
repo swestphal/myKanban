@@ -5,7 +5,16 @@ export * from './alertActions';
 export * from './authActions';
 export * from './profileActions';
 
+export * from './themeActions';
+
 export const CONSTANTS = {
+
+    /**
+     * Toggle Theme
+     */
+
+    TOGGLE_THEME: 'TOGGLE_THEME',
+
 
     /**
      * Add Card or List to Board
