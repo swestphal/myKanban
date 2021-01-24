@@ -19,4 +19,5 @@ export const GlobalStyles = createGlobalStyle`
   h3 {
       font-size:20px;
   }
+  
   `

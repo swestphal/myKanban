@@ -2,6 +2,10 @@ import React from 'react';
 import { func, string } from 'prop-types';
 import styled from 'styled-components';
 import { Moon as MoonIcon, Sun as SunIcon } from "react-feather";
+import { connect } from 'react-redux';
+import { toggleTheme } from '../../actions'
+import PropTypes from 'prop-types';
+
 const ThemeButton = styled.button`
   background: ${({ theme }) => theme.bg};
   border: 2px solid ${({ theme }) => theme.accent};
@@ -29,24 +33,28 @@ const ThemeButton = styled.button`
 `;
 
 const Toggle = ({ theme, toggleTheme }) => {
-  const light = theme === 'light';
+
+  const light = theme === 'lightMode';
   return (
-    <ThemeButton onClick={toggleTheme}>
+    <ThemeButton onClick={() => toggleTheme()} >
       <SunIcon
         style={{ transform: light ? 'translateY(0)' : 'translateY(2rem)' }}
       />
       <MoonIcon
         style={{ transform: light ? 'translateY(2rem)' : 'translateY(0)' }}
       />
-    </ThemeButton>
+    </ThemeButton >
   );
 };
-/* using propTypes to define the types of the prop:
-    theme is the current selected theme
-    toggleTheme is the function that is used to switch between the themes
- */
+
 Toggle.propTypes = {
-  theme: string.isRequired,
-  toggleTheme: func.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
 };
-export default Toggle;
+
+
+const mapStateToProps = (state) => ({
+  theme: state.theme
+})
+
+export default connect(mapStateToProps, { toggleTheme })(Toggle);
+

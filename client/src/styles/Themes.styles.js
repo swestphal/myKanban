@@ -1,4 +1,4 @@
-export const lightTheme = {
+export const lightMode = {
     bg: '#ffffff',
     bgAccent: '#ffffff',
     text: '#9798a7',
@@ -7,9 +7,10 @@ export const lightTheme = {
     btn1: '#5dbf75',
     btn2: '#62c278',
 
-    accent: '#5dc074'
+    accent: '#5dc074',
+
 }
-export const darkTheme = {
+export const darkMode = {
     bg: '#202129',
     bgAccent: '#292a33',
     text: '#868686',

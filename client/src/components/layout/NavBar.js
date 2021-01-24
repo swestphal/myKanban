@@ -3,8 +3,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout, isAuthenticated, loading } from '../../actions';
-
-
+import ThemeToggler from '../theming/ThemeToggler'
+import Nav from '../../styles/NavBar.styles'
 
 const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
@@ -49,14 +49,17 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     );
 
     return (
-        <nav className='navbar bg-dark'>
-            <h1>
-                <Link to='/'>
-                    <i className='fas fa-code'></i> Your Kanban Board
+        <>
+            <Nav >
+                <h1>
+                    <Link to='/'>
+                        <i className='fas fa-code'></i> Your Kanban Board
                 </Link>
-            </h1>
-            {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
-        </nav>
+                </h1>
+                {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+            </Nav>
+            <ThemeToggler />
+        </>
     );
 };
 

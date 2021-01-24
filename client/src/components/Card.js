@@ -15,6 +15,7 @@ const styles = {
 };
 
 const Card = ({ title, text, id, index }) => {
+
     return (
         <Draggable draggableId={String(id)} index={index}>
             {(provided) => (
