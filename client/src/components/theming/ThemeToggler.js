@@ -1,16 +1,12 @@
 import React from 'react';
-import { func, string } from 'prop-types';
-
-import { Moon as MoonIcon, Sun as SunIcon } from "react-feather";
 import { connect } from 'react-redux';
 import { toggleTheme } from '../../actions'
 import PropTypes from 'prop-types';
 
+import { Moon as MoonIcon, Sun as SunIcon } from "react-feather";
 import ThemeButton from '../../styles/ThemeToggler.styles'
 
 //TODO set theme state to local storage in order to remember for returning users   
-
-
 
 const Toggle = ({ theme, toggleTheme }) => {
 
@@ -29,6 +25,7 @@ const Toggle = ({ theme, toggleTheme }) => {
 
 Toggle.propTypes = {
   toggleTheme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
 };
 
 
