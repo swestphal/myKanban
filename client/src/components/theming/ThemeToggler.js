@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import { toggleTheme } from '../../actions'
 import PropTypes from 'prop-types';
 
+//TODO Clean styles
+//TODO set theme state to local storage in order to remember for returning users   
+
 const ThemeButton = styled.button`
   background: ${({ theme }) => theme.bg};
   border: 2px solid ${({ theme }) => theme.accent};
