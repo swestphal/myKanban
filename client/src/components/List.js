@@ -2,21 +2,8 @@ import React from 'react';
 import AddButton from './AddButton';
 import Card from './Card';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import SingleList from '../styles/List.styles'
 
-const styles = {
-    list: {
-
-        width: '300px',
-
-
-        padding: '10px',
-        boxSizing: 'border-box',
-        margin: '10px',
-    },
-    heading: {
-
-    },
-};
 
 const List = ({ title, cards, listID, index }) => {
     return (
@@ -27,7 +14,7 @@ const List = ({ title, cards, listID, index }) => {
                     ref={provided.innerRef}
                     {...provided.dragHandleProps}
                 >
-                    <div style={styles.list}>
+                    <SingleList>
                         <Droppable droppableId={String(listID)} type='card'>
                             {(provided) => (
                                 <div
@@ -50,7 +37,7 @@ const List = ({ title, cards, listID, index }) => {
                                 </div>
                             )}
                         </Droppable>
-                    </div>
+                    </SingleList>
                 </div>
             )}
         </Draggable>
