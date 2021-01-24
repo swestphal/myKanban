@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
+import { GlobalStyles } from './../styles/GlobalStyles'
 /**
  * Theming
  */
 import { useThemeMode } from './theming/useThemeMode';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../styles/Themes.styles';
+import ThemeToggler from './theming/ThemeToggler';
 
 import Board from './Board';
 import NavBar from './layout/NavBar';
@@ -36,6 +38,9 @@ const App = (props) => {
     }, []);
     return (
         <ThemeProvider theme={themeMode}>
+            <GlobalStyles />
+            <ThemeToggler theme={theme} toggleTheme={themeToggler} />
+
             <Provider store={store}>
                 <Router>
                     <>
@@ -74,6 +79,7 @@ const App = (props) => {
                         </section>
                     </>
                 </Router>
+
             </Provider>
         </ThemeProvider >
     );
