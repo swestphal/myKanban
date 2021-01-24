@@ -2,8 +2,12 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
-
-
+/**
+ * Theming
+ */
+import { useThemeMode } from './theming/useThemeMode';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from '../styles/Themes.styles';
 
 import Board from './Board';
 import NavBar from './layout/NavBar';
@@ -22,49 +26,56 @@ if (localStorage.token) {
     setAuthToken(localStorage.token);
 }
 const App = (props) => {
+
+    /* Theming  */
+    const [theme, themeToggler, mountedComponent] = useThemeMode();
+    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
     useEffect(() => {
         store.dispatch(loadUser());
     }, []);
     return (
-        <Provider store={store}>
-            <Router>
-                <>
-                    <NavBar />
-                    <Route exact path='/' component={Landing} />
-                    <section className='container'>
-                        <Alert />
-                        <Switch>
-                            <Route
-                                exact
-                                path='/register'
-                                component={Register}
-                            />
-                            <Route exact path='/login' component={Login} />{' '}
-                            <PrivateRoute
-                                exact
-                                path='/create-profile'
-                                component={ProfileForm}
-                            />
-                            <PrivateRoute
-                                exact
-                                path='/edit-profile'
-                                component={ProfileForm}
-                            />
-                            <PrivateRoute
-                                exact
-                                path='/dashboard'
-                                component={Dashboard}
-                            />
-                            <PrivateRoute
-                                exact
-                                path='/board'
-                                component={Board}
-                            />
-                        </Switch>
-                    </section>
-                </>
-            </Router>
-        </Provider>
+        <ThemeProvider theme={themeMode}>
+            <Provider store={store}>
+                <Router>
+                    <>
+                        <NavBar />
+                        <Route exact path='/' component={Landing} />
+                        <section className='container'>
+                            <Alert />
+                            <Switch>
+                                <Route
+                                    exact
+                                    path='/register'
+                                    component={Register}
+                                />
+                                <Route exact path='/login' component={Login} />{' '}
+                                <PrivateRoute
+                                    exact
+                                    path='/create-profile'
+                                    component={ProfileForm}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path='/edit-profile'
+                                    component={ProfileForm}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path='/dashboard'
+                                    component={Dashboard}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path='/board'
+                                    component={Board}
+                                />
+                            </Switch>
+                        </section>
+                    </>
+                </Router>
+            </Provider>
+        </ThemeProvider >
     );
 };
 

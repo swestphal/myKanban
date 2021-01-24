@@ -4,7 +4,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout, isAuthenticated, loading } from '../../actions';
 
+/**
+ * Theming
+ */
+import { useThemeMode } from './../theming/useThemeMode';
+import { lightTheme, darkTheme } from '../../styles/Themes.styles';
+import ThemeToggler from '../theming/ThemeToggler';
+
 const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
+    /* Theming  */
+    const [theme, themeToggler, mountedComponent] = useThemeMode();
+    const themeMode = theme === 'light' ? lightTheme : darkTheme;
     const authLinks = (
         <li>
             <ul>
@@ -53,6 +63,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </Link>
             </h1>
             {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+            <ThemeToggler theme={theme} toggleTheme={themeToggler} />
         </nav>
     );
 };
