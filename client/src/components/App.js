@@ -40,7 +40,6 @@ const App = (props) => {
         <ThemeProvider theme={themeMode}>
             <GlobalStyles />
             <ThemeToggler theme={theme} toggleTheme={themeToggler} />
-
             <Provider store={store}>
                 <Router>
                     <>

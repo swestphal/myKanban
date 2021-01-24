@@ -12,5 +12,11 @@ export const GlobalStyles = createGlobalStyle`
   }
   h1,h2,h3,h4,h5 {
       color:${({ theme }) => theme.textEm};
+      font-weight:700;
+      font-family:'Lato'
+    
+  }
+  h3 {
+      font-size:20px;
   }
   `

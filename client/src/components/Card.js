@@ -4,16 +4,13 @@ import { Draggable } from 'react-beautiful-dnd';
 const styles = {
     card: {
         background: 'white',
-        borderRadius: '5px',
+        borderRadius: '3px',
         padding: '5px 10px',
         margin: '10px 0',
+        boxShadow: '0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)'
     },
     heading: {
-        marginTop: '10px',
-        fontSize: '16px',
-        fontWeight: '100',
-        fontFamily: 'Kufam',
-        textTransform: 'uppercase',
+        textTransform: 'initial',
     },
 };
 
