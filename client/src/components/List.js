@@ -1,5 +1,5 @@
 import React from 'react';
-import AddButton from './AddButton';
+import AddCard from './AddCard';
 import Card from './Card';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import SingleList from '../styles/List.styles'
@@ -21,7 +21,7 @@ const List = ({ title, cards, listID, index }) => {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    <h3>{title}</h3>
+                                    <h3 className="colouredBorder" data-colour={parseInt((listID.split('-')[1]) % 5)}>{title}</h3>
                                     {cards.map((card, index) => (
                                         <Card
                                             id={card.id}
@@ -33,7 +33,7 @@ const List = ({ title, cards, listID, index }) => {
                                     ))}
 
                                     {provided.placeholder}
-                                    <AddButton listID={listID} />
+                                    <AddCard listID={listID} />
                                 </div>
                             )}
                         </Droppable>

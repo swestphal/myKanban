@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import List from './List';
-import AddButton from './AddButton';
+import AddList from './AddList';
 import { sort } from '../actions';
 
 const styles = {
@@ -67,7 +67,7 @@ const Board = (props) => {
                                     />
                                 ))}
                                 {provided.placeholder}
-                                <AddButton list />
+                                <AddList list />
                             </div>
                         )}
                     </Droppable>
