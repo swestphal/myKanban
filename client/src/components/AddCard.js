@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addList } from '../actions';
+import { addCard } from '../actions';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -12,20 +12,21 @@ const styles = {
         padding: '5px',
     },
 };
-
-
-const AddList = ({ title, addList }) => {
+const AddCard = ({ addCard, listID }) => {
+    console.log(listID)
     const initialState = {
         formOpen: false,
-        title: ''
-    }
+        title: '',
+        text: '',
+        listID: listID
+    };
 
     const [formData, setFormData] = useState({
         initialState
     });
 
     const handleInputChange = (e) => {
-        setFormData({ ...formData, title: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const closeForm = () => {
@@ -38,56 +39,51 @@ const AddList = ({ title, addList }) => {
     };
 
 
-    // TODO autosize textarea
 
     const renderForm = () => {
+
+        // TODO autosize textarea
+
         return (
             <div>
                 <p onClick={closeForm}>- close form</p>
-
+                <input placeholder="Enter a Title" name="title" autoFocus value={formData.title}
+                    onChange={(e) => handleInputChange(e)} type="title" />
                 <textarea
-                    name="title"
+                    name="text"
                     style={styles.textarea}
-                    placeholder="Title"
+                    placeholder="Text"
                     autoFocus
-                    onBlur={closeForm}
-                    value={formData.title}
+
+                    value={formData.text}
                     onChange={(e) => handleInputChange(e)}
                 />
                 {formData.formOpen ? (
                     //@ onMouseDown fires before onBlurFunction  :-)
                     <button
-                        onMouseDown={handleAddList}>
-                        Add List
+                        onMouseDown={handleAddCard}>
+                        Add Card
                     </button>
                 ) : ('')}
             </div>
         );
     };
 
-    /*const handleAddList = () => {
-        const { dispatch } = this.props;
-        const { text } = this.state;
 
-        if (text) {
-            this.setState({ text: '' });
-            dispatch(addList(text));
-        }
-        return;
-    };*/
 
-    const handleAddList = () => {
-        if (formData.title) {
-            console.log(FormData)
-            addList(formData.title);
+    const handleAddCard = () => {
+        if (formData) {
+            console.log(formData)
+            addCard(listID, formData);
         }
         return;
     };
-
 
     const renderAddButton = () => {
-        return <div onClick={openForm}>+ Add another List</div>;
+
+        return <div onClick={openForm}>+ Add another Card</div>;
     };
+
 
     return (
         <div>
@@ -96,14 +92,16 @@ const AddList = ({ title, addList }) => {
                 : renderAddButton()}
         </div>
     );
+
 }
 
-AddList.propTypes = {
-    addList: PropTypes.func.isRequired,
-    title: PropTypes.object,
+AddCard.propTypes = {
+    addCard: PropTypes.func.isRequired,
+    formData: PropTypes.object,
+
 }
 const mapStateToProps = (state) => ({
-    title: state.title,
+    formData: state.formData,
 });
 
-export default connect(mapStateToProps, { addList })(AddList);
+export default connect(mapStateToProps, { addCard })(AddCard);

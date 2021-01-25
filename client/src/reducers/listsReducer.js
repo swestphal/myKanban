@@ -55,9 +55,10 @@ const listsReducer = (state = initialState, action) => {
 
         case CONSTANTS.ADD_CARD: {
             cardID += 1;
+
             const newCard = {
-                title: action.payload.title,
-                text: action.payload.text,
+                title: action.payload.formData.title,
+                text: action.payload.formData.text,
                 id: `card-${cardID}`,
             };
             const newState = state.map((list) => {
