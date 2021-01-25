@@ -9,10 +9,12 @@ export const lightMode = {
 
     accent: '#5dc074',
 
+    shadow: '0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);'
+
 }
 export const darkMode = {
     bg: '#202129',
-    bgAccent: '#292a33',
+    bgAccent: '#282932',
     text: '#868686',
     textEm: '#c3c3c5',
 
@@ -21,4 +23,5 @@ export const darkMode = {
 
     accent: '#5b7ff2',
 
+    shadow: '0 5px 10px rgba(40,40,51,.05), 0 15px 40px rgba(26,26,35,.02);'
 }
