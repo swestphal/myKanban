@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
+/**
+ * Layout
+ */
+import NavBar from './../layout/NavBar';
+
 
 const Dashboard = ({
     getCurrentProfile,
@@ -17,23 +22,24 @@ const Dashboard = ({
     return loading && profile === null ? (
         <Spinner />
     ) : (
-        <>
-            <h1 className='large text-primary'>dashboard</h1>
-            <p className='lead'>
-                <i className='fas fa-user'></i> Welcome {user && user.name}
-            </p>
-            {profile !== null ? (
-                <DashboardActions />
-            ) : (
-                <>
-                    <p>Pease set up your profile</p>
-                    <Link to='/create-profile' className='btn btn-primary my-1'>
-                        Create Profile
+            <>
+                <NavBar />
+                <h1 >Dashboard</h1>
+                <p className='lead'>
+                    Welcome {user && user.name}
+                </p>
+                {profile !== null ? (
+                    <DashboardActions />
+                ) : (
+                        <>
+                            <p>Please set up your profile</p>
+                            <Link to='/create-profile' className='btn btn-primary my-1'>
+                                Create Profile
                     </Link>
-                </>
-            )}
-        </>
-    );
+                        </>
+                    )}
+            </>
+        );
 };
 
 Dashboard.propTypes = {

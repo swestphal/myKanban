@@ -4,38 +4,36 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout, isAuthenticated, loading } from '../../actions';
 import ThemeToggler from '../theming/ThemeToggler'
-import Nav from '../../styles/NavBar.styles'
+import NavBarStyled from '../../styles/layout/NavBar.styles'
 
 const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const authLinks = (
-        <li>
-            <ul>
-                <li>
-                    <Link to='/board'>
-                        <i className='fas fa-user' />
-                        <span className='hide-sm'>Your Kanban Board</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to='/dashboard'>
-                        <i className='fas fa-user' />
-                        <span className='hide-sm'>Dashboard</span>
-                    </Link>
-                </li>
-                <li>
-                    <a onClick={logout} href='#!'>
-                        <i className='fas fa-sign-out-alt' />
-                        <span className='hide-sm'>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
+        <>
+            <li>
+                <Link to='/board'>
+                    <i className='fas fa-user' />
+                    <span className='hide-sm'>Your Kanban Board</span>
+                </Link>
+            </li>
+            <li>
+                <Link to='/dashboard'>
+                    <i className='fas fa-user' />
+                    <span className='hide-sm'>Dashboard</span>
+                </Link>
+            </li>
+            <li>
+                <a onClick={logout} href='#!'>
+                    <i className='fas fa-sign-out-alt' />
+                    <span className='hide-sm'>Logout</span>
+                </a>
+            </li>
+        </>
     );
 
     const guestLinks = (
-        <ul>
-
+        <>
             <li>
                 <Link to='/register'>Register</Link>
             </li>
@@ -45,20 +43,29 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
             <li>
                 <Link to='/profiles'>Info</Link>
             </li>
-        </ul>
+        </>
     );
 
     return (
         <>
-            <Nav >
-                <h1>
-                    <Link to='/'>
-                        <i className='fas fa-code'></i> Your Kanban Board
-                </Link>
-                </h1>
-                {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
-            </Nav>
-            <ThemeToggler />
+            <NavBarStyled>
+                <div>
+                    <h1>
+                        <Link to='/'>
+                            <i className='fas fa-code'></i> Your Kanban Board
+                    </Link>
+                    </h1>
+                </div>
+                <div>
+                    <ul>
+                        {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+                        <li><ThemeToggler /></li>
+                    </ul>
+
+                </div>
+
+            </NavBarStyled>
+
         </>
     );
 };

@@ -22,10 +22,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './../styles/GlobalStyles'
 import { lightMode, darkMode } from '../styles/Themes.styles'
 
-/**
- * Layout
- */
-import NavBar from './layout/NavBar';
+
 
 
 /**
@@ -63,9 +60,10 @@ const App = ({ theme }) => {
             <GlobalStyles />
             <Provider store={store} >
                 <Router>
-                    <NavBar />
+
                     <Route exact path='/' component={Landing} />
-                    <section className='container'>
+
+                    <section className='wrapper'>
                         <Alert />
                         <Switch>
                             <Route

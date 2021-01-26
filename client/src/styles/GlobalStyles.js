@@ -9,6 +9,9 @@ export const GlobalStyles = createGlobalStyle`
     font-family:'Lato'
   }
 
+    .wrapper {
+      padding:1em 3em;
+    }
   a {
       text-decoration:none;
       color:inherit

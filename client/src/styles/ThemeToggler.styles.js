@@ -9,7 +9,7 @@ const ThemeButton = styled.button`
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  position: absolute;
+
   top 1rem;
   right: 1rem;
   width: 4rem;
