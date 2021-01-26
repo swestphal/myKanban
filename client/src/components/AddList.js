@@ -65,17 +65,6 @@ const AddList = ({ title, addList }) => {
         );
     };
 
-    /*const handleAddList = () => {
-        const { dispatch } = this.props;
-        const { text } = this.state;
-
-        if (text) {
-            this.setState({ text: '' });
-            dispatch(addList(text));
-        }
-        return;
-    };*/
-
     const handleAddList = () => {
         if (formData.title) {
             console.log(FormData)

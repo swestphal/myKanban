@@ -141,6 +141,7 @@ ProfileForm.propTypes = {
     profile: PropTypes.object.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = (state) => ({
     profile: state.profile,
 });
