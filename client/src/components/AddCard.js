@@ -2,16 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addCard } from '../actions';
 import PropTypes from 'prop-types';
+import CardForm from '../styles/CardForm.styles'
 
-const styles = {
-    textarea: {
-        resize: 'none',
-        width: 'calc(100% - 6px)',
-        outline: 'none',
-        minHeight: '100px',
-        padding: '5px',
-    },
-};
 const AddCard = ({ addCard, listID }) => {
     console.log(listID)
     const initialState = {
@@ -45,13 +37,13 @@ const AddCard = ({ addCard, listID }) => {
         // TODO autosize textarea
 
         return (
-            <div>
-                <p onClick={closeForm}>- close form</p>
+            <div className="Card__input" >
+                <p className="Card__closeButton" onClick={closeForm}>- close form</p>
                 <input placeholder="Enter a Title" name="title" autoFocus value={formData.title}
-                    onChange={(e) => handleInputChange(e)} type="title" />
+                    onChange={(e) => handleInputChange(e)} type="text" />
                 <textarea
                     name="text"
-                    style={styles.textarea}
+
                     placeholder="Text"
                     autoFocus
 
@@ -60,10 +52,9 @@ const AddCard = ({ addCard, listID }) => {
                 />
                 {formData.formOpen ? (
                     //@ onMouseDown fires before onBlurFunction  :-)
-                    <button
-                        onMouseDown={handleAddCard}>
-                        Add Card
-                    </button>
+                    <input type="submit"
+                        onMouseDown={handleAddCard} value="Add Card" />
+
                 ) : ('')}
             </div>
         );
@@ -81,16 +72,16 @@ const AddCard = ({ addCard, listID }) => {
 
     const renderAddButton = () => {
 
-        return <div onClick={openForm}>+ Add another Card</div>;
+        return <div className="Card__addButton" onClick={openForm}>+ Add another Card</div>;
     };
 
 
     return (
-        <div>
+        <CardForm>
             {formData.formOpen
                 ? renderForm()
                 : renderAddButton()}
-        </div>
+        </CardForm>
     );
 
 }

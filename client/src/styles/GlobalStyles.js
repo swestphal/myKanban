@@ -6,7 +6,9 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.bg};
     color: ${({ theme }) => theme.text};
     transition: all 0.250s ease-in;
-    font-family:'Lato'
+    * {
+      font-family:'Lato'
+    }
   }
 
     .wrapper {
@@ -63,7 +65,7 @@ select:-webkit-autofill:focus {
 ::-webkit-input-placeholder { color: ${({ theme }) => theme.text}; }
 ::-moz-placeholder { color: ${({ theme }) => theme.text}; font-weight:300; }
 
-input{
+input, textarea {
   border-radius: 3px;
   padding: 5px 10px;
   margin: 10px 0;
@@ -79,6 +81,7 @@ input{
   box-shadow:  ${({ theme }) => theme.form};
   transition: box-shadow 0.5s ease;
 }
+
 input[type="submit"]{
   cursor:pointer;
   background:${({ theme }) => theme.buttonBg};
