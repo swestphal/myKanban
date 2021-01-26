@@ -60,7 +60,6 @@ const App = ({ theme }) => {
             <GlobalStyles />
             <Provider store={store} >
                 <Router>
-
                     <Route exact path='/' component={Landing} />
 
                     <section className='wrapper'>
@@ -92,6 +91,7 @@ const App = ({ theme }) => {
                                 path='/board'
                                 component={Board}
                             />
+
                         </Switch>
                     </section>
                 </Router>

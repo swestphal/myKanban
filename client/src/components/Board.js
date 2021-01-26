@@ -7,6 +7,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import List from './List';
 import AddList from './AddList';
 import { sort } from '../actions';
+import NavBar from './../components/layout/NavBar'
 
 const styles = {
     board: {
@@ -36,42 +37,36 @@ const Board = (props) => {
 
     return (
         <div>
-            <nav className='navbar bg-dark'>
-                <h1>
-                    <Link to='/dashboard'>
-                        <i className='fas fa-code'></i> Your dashboard
-                    </Link>
-                </h1>
-            </nav>
+            <NavBar />
             <DragDropContext onDragEnd={onDragEnd}>
-                <div className='App'>
-                    <header className='App-header'>Your boards</header>
-                    <Droppable
-                        droppableId='droppable'
-                        direction='horizontal'
-                        type='list'
-                    >
-                        {(provided) => (
-                            <div
-                                style={styles.board}
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                {lists.map((list, index) => (
-                                    <List
-                                        listID={list.id}
-                                        key={list.id}
-                                        title={list.title}
-                                        cards={list.cards}
-                                        index={index}
-                                    />
-                                ))}
-                                {provided.placeholder}
-                                <AddList list />
-                            </div>
-                        )}
-                    </Droppable>
-                </div>
+
+
+                <Droppable
+                    droppableId='droppable'
+                    direction='horizontal'
+                    type='list'
+                >
+                    {(provided) => (
+                        <div
+                            style={styles.board}
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                        >
+                            {lists.map((list, index) => (
+                                <List
+                                    listID={list.id}
+                                    key={list.id}
+                                    title={list.title}
+                                    cards={list.cards}
+                                    index={index}
+                                />
+                            ))}
+                            {provided.placeholder}
+                            <AddList list />
+                        </div>
+                    )}
+                </Droppable>
+
             </DragDropContext>
         </div>
     );
