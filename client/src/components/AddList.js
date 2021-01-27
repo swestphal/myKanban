@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../actions';
 import PropTypes from 'prop-types';
+import ListForm from '../styles/ListForm.styles'
 
 const styles = {
     textarea: {
@@ -42,7 +43,7 @@ const AddList = ({ title, addList }) => {
 
     const renderForm = () => {
         return (
-            <div>
+            <div className="List__input">
                 <p onClick={closeForm}>- close form</p>
 
                 <textarea
@@ -56,10 +57,9 @@ const AddList = ({ title, addList }) => {
                 />
                 {formData.formOpen ? (
                     //@ onMouseDown fires before onBlurFunction  :-)
-                    <button
+                    <input type="submit" value="Add List"
                         onMouseDown={handleAddList}>
-                        Add List
-                    </button>
+                    </input>
                 ) : ('')}
             </div>
         );
@@ -67,23 +67,24 @@ const AddList = ({ title, addList }) => {
 
     const handleAddList = () => {
         if (formData.title) {
-            console.log(FormData)
+
             addList(formData.title);
+            closeForm();
         }
         return;
     };
 
 
     const renderAddButton = () => {
-        return <div onClick={openForm}>+ Add another List</div>;
+        return <div className="List__addButton" onClick={openForm}>+ Add another List</div>;
     };
 
     return (
-        <div>
+        <ListForm>
             {formData.formOpen
                 ? renderForm()
                 : renderAddButton()}
-        </div>
+        </ListForm>
     );
 }
 
