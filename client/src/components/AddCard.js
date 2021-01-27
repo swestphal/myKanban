@@ -65,9 +65,12 @@ const AddCard = ({ addCard, listID }) => {
 
     const handleAddCard = () => {
         if (formData) {
-            console.log(formData)
-            addCard(listID, formData);
-            closeForm();
+
+            if (formData.text && formData.title) {
+
+                addCard(listID, formData);
+                closeForm();
+            }
         }
         return;
     };
