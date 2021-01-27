@@ -43,6 +43,7 @@ const initialState = [
 ];
 
 const listsReducer = (state = initialState, action) => {
+    console.log(state);
     switch (action.type) {
         case CONSTANTS.ADD_LIST:
             listID += 1;

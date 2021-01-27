@@ -8,8 +8,8 @@ const AddCard = ({ addCard, listID }) => {
     console.log(listID)
     const initialState = {
         formOpen: false,
-        title: '',
-        text: '',
+        title: 'g',
+        text: 'g',
         listID: listID
     };
 
@@ -17,9 +17,7 @@ const AddCard = ({ addCard, listID }) => {
         initialState
     });
 
-    const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+
 
     const closeForm = () => {
         setFormData({ formOpen: false });
@@ -30,7 +28,9 @@ const AddCard = ({ addCard, listID }) => {
         setFormData({ formOpen: true });
     };
 
-
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const renderForm = () => {
 
@@ -39,14 +39,15 @@ const AddCard = ({ addCard, listID }) => {
         return (
             <div className="Card__input" >
                 <p className="Card__closeButton" onClick={closeForm}>- close form</p>
-                <input placeholder="Enter a Title" name="title" autoFocus value={formData.title}
+                <input
+                    name="title"
+                    autoFocus
+                    value={formData.title}
+                    placeholder="Enter a Title"
                     onChange={(e) => handleInputChange(e)} type="text" />
                 <textarea
                     name="text"
-
                     placeholder="Text"
-                    autoFocus
-
                     value={formData.text}
                     onChange={(e) => handleInputChange(e)}
                 />
@@ -66,6 +67,7 @@ const AddCard = ({ addCard, listID }) => {
         if (formData) {
             console.log(formData)
             addCard(listID, formData);
+            closeForm();
         }
         return;
     };
@@ -89,7 +91,6 @@ const AddCard = ({ addCard, listID }) => {
 AddCard.propTypes = {
     addCard: PropTypes.func.isRequired,
     formData: PropTypes.object,
-
 }
 const mapStateToProps = (state) => ({
     formData: state.formData,
