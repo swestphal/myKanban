@@ -24,6 +24,7 @@ const List = ({ title, cards, listID, index }) => {
                                     <h3 className="colouredBorder" data-colour={parseInt((listID.split('-')[1]) % 5)}>{title}</h3>
                                     {cards.map((card, index) => (
                                         <Card
+                                            listID={listID}
                                             id={card.id}
                                             key={card.id}
                                             index={index}
