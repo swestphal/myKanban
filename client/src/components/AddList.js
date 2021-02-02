@@ -15,10 +15,10 @@ const styles = {
 };
 
 
-const AddList = ({ title, addList }) => {
+const AddList = ({ list_title, addList }) => {
     const initialState = {
         formOpen: false,
-        title: ''
+        list_title: ''
     }
 
     const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const AddList = ({ title, addList }) => {
     });
 
     const handleInputChange = (e) => {
-        setFormData({ ...formData, title: e.target.value });
+        setFormData({ ...formData, list_title: e.target.value });
     };
 
     const closeForm = () => {
@@ -47,12 +47,12 @@ const AddList = ({ title, addList }) => {
                 <p onClick={closeForm}>- close form</p>
 
                 <textarea
-                    name="title"
+                    name="list_title"
                     style={styles.textarea}
                     placeholder="Title"
                     autoFocus
                     onBlur={closeForm}
-                    value={formData.title}
+                    value={formData.list_title}
                     onChange={(e) => handleInputChange(e)}
                 />
                 {formData.formOpen ? (
@@ -66,9 +66,9 @@ const AddList = ({ title, addList }) => {
     };
 
     const handleAddList = () => {
-        if (formData.title) {
+        if (formData.list_title) {
 
-            addList(formData.title);
+            addList(formData.list_title);
             closeForm();
         }
         return;
@@ -90,10 +90,10 @@ const AddList = ({ title, addList }) => {
 
 AddList.propTypes = {
     addList: PropTypes.func.isRequired,
-    title: PropTypes.object,
+    list_title: PropTypes.object,
 }
 const mapStateToProps = (state) => ({
-    title: state.title,
+    list_title: state.list_title,
 });
 
 export default connect(mapStateToProps, { addList })(AddList);

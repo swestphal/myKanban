@@ -17,8 +17,10 @@ const Card = ({ title, text, id, index, listID }) => {
                         <h3 >position: {index} on list: {listID} with id: {id} {title}</h3>
                         <p>{text}</p>
                     </div>
+
                 </SingleCard>
             )}
+
         </Draggable>
     );
 };

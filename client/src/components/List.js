@@ -5,7 +5,8 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import SingleList from '../styles/List.styles'
 
 
-const List = ({ title, cards, listID, index }) => {
+const List = ({ list_title, cards, listID, index, ...rest }) => {
+
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {(provided) => (
@@ -21,7 +22,7 @@ const List = ({ title, cards, listID, index }) => {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    <h3 className="colouredBorder" data-colour={parseInt((listID.split('-')[1]) % 5)}>{title}</h3>
+                                    <h3 className="colouredBorder" data-colour={parseInt((listID.split('-')[1]) % 5)}>{list_title}</h3>
                                     {cards.map((card, index) => (
                                         <Card
                                             listID={listID}
@@ -30,6 +31,7 @@ const List = ({ title, cards, listID, index }) => {
                                             index={index}
                                             text={card.text}
                                             title={card.title}
+
                                         />
                                     ))}
 

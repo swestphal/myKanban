@@ -17,13 +17,14 @@ export const CONSTANTS = {
 
 
     /**
-     * Add Card or List to Board
+     * Add / Get Card or List to Board
      */
 
     ADD_CARD: 'ADD_CARD',
     ADD_LIST: 'ADD_LIST',
     DRAG_FINISHED: 'DRAG_FINISHED',
 
+    GET_LISTS: 'GET_LISTS',
 
     /**
      *  User & Authentification

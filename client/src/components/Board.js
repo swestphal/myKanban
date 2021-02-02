@@ -15,6 +15,7 @@ const styles = {
     },
 };
 const Board = (props) => {
+
     const onDragEnd = (result) => {
         const { destination, source, draggableId, type } = result;
         if (!destination) {
@@ -52,15 +53,19 @@ const Board = (props) => {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            {lists.map((list, index) => (
-                                <List
-                                    listID={list.id}
-                                    key={list.id}
-                                    title={list.title}
-                                    cards={list.cards}
-                                    index={index}
-                                />
-                            ))}
+                            {lists.map((list, index) => {
+                                console.log(list);
+                                return (
+
+                                    < List
+                                        listID={list.id}
+                                        key={list.id}
+                                        list_title={list.list_title}
+                                        cards={list.cards}
+                                        index={index}
+                                    />
+                                )
+                            })}
                             {provided.placeholder}
                             <AddList list />
                         </div>
