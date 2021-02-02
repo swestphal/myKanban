@@ -24,7 +24,7 @@ const Dashboard = ({
     ) : (
             <>
                 <NavBar />
-                <h1 >Dashboard</h1>
+                <h1>Dashboard</h1>
                 <p className='lead'>
                     Welcome {user && user.name}
                 </p>

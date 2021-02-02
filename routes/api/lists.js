@@ -38,7 +38,15 @@ router.post(
 // @desc    Get boards
 // @access  Private
 
-
+router.get('/', auth, async (req, res) => {
+    try {
+        const lists = await List.find().sort({ date: -1 });
+        res.json(lists);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
 
 // @route   PUT api/lists/:id
 // @desc    Edit single list

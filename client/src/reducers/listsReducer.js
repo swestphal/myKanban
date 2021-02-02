@@ -2,66 +2,35 @@ import { CONSTANTS } from '../actions';
 
 let listID = 2;
 let cardID = 20;
-const initialState = [
-    {
-        title: 'First List',
-        id: `list-${0}`,
-        cards: [
-            {
-                id: `card-${0}`,
-                title: 'UX/UI Design ',
-                text: 'here comes the text for the first card',
-            },
-            {
-                id: `card-${1}`,
-                title: 'Phonecall Molly',
-                text: 'nice little second card',
-            },
-        ],
-    },
-    {
-        title: 'Second List',
-        id: `list-${2}`,
-        cards: [
-            {
-                id: `card-${4}`,
-                title: 'Run Tests',
-                text: 'here comes the text for the first card',
-            },
-            {
-                id: `card-${6}`,
-                title: 'Clean Database',
-                text: 'nice little second card',
-            },
-            {
-                id: `card-${8}`,
-                title: 'Call the Designer',
-                text: 'again nice little second card',
-            },
-        ],
-    },
-];
+const initialState = {
+    lists: [],
+    list: null,
+    loading: true,
+    error: {}
+};
 
 const listsReducer = (state = initialState, action) => {
-    console.log(action)
+
     switch (action.type) {
         case CONSTANTS.ADD_LIST:
             listID = action.payload._id;
             const newList = {
+
                 list_title: action.payload.list_title,
                 cards: [],
                 id: `list-${listID}`,
             };
-            return [...state, newList];
+            return {
+                ...state,
+                lists: [...state.lists, newList],
+            };
 
         case CONSTANTS.GET_LISTS:
-            listID = action.payload._id;
-            const newLists = {
-                title: action.payload.list_title,
-                cards: [],
-                id: `list-${listID}`,
+            return {
+                ...state,
+                lists: action.payload,
+                loading: false
             };
-            return [...state, newLists];
 
         case CONSTANTS.ADD_CARD: {
             cardID += 1;
@@ -93,13 +62,14 @@ const listsReducer = (state = initialState, action) => {
                 type,
             } = action.payload;
 
-            const newState = [...state];
+            //const newState = [...state];
 
+            const newState = { ...state };
             // dragging lists
-            console.log(draggableId);
             if (type === 'list') {
-                const list = newState.splice(droppableIndexStart, 1);
-                newState.splice(droppableIndexEnd, 0, ...list);
+                const list = newState.lists.splice(droppableIndexStart, 1);
+                newState.lists.splice(droppableIndexEnd, 0, ...list);
+                // TODO save to database
                 return newState;
             }
             if (droppableIdStart === droppableIdEnd) {

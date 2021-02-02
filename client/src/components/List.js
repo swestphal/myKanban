@@ -6,7 +6,7 @@ import SingleList from '../styles/List.styles'
 
 
 const List = ({ list_title, cards, listID, index, ...rest }) => {
-
+    console.log(list_title)
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {(provided) => (
@@ -23,7 +23,7 @@ const List = ({ list_title, cards, listID, index, ...rest }) => {
                                     ref={provided.innerRef}
                                 >
                                     <h3 className="colouredBorder" data-colour={parseInt((listID.split('-')[1]) % 5)}>{list_title}</h3>
-                                    {cards.map((card, index) => (
+                                    {cards && cards.map((card, index) => (
                                         <Card
                                             listID={listID}
                                             id={card.id}
