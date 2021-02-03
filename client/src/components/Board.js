@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -16,10 +16,20 @@ const styles = {
 };
 const Board = (props) => {
 
+    const [highestList, setHighestList] = useState(10)
 
     useEffect(() => {
         props.getLists();
+        console.log(props.lists.loading)
+        // find highest order number of list
+        if (!props.lists.loading) {
+            const highest = (props.lists.lists).reduce((highVal, currVal) => {
+                if (currVal.order > highVal.order) return currVal;
+                else return highVal
+            })
+            setHighestList(highest.order)
 
+        }
     }, [getLists]);
 
     const onDragEnd = (result) => {
@@ -39,7 +49,6 @@ const Board = (props) => {
 
         );
     };
-
 
     return (
         <div>
@@ -73,7 +82,7 @@ const Board = (props) => {
                                         )
                                     })}
                                     {provided.placeholder}
-                                    <AddList list />
+                                    <AddList list order={highestList} />
                                 </div>
                             )}
                         </Droppable>

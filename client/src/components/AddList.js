@@ -15,10 +15,12 @@ const styles = {
 };
 
 
-const AddList = ({ list_title, addList }) => {
+const AddList = ({ list_title, order, addList }) => {
+    console.log(order)
     const initialState = {
         formOpen: false,
-        list_title: ''
+        list_title: '',
+        order: 0
     }
 
     const [formData, setFormData] = useState({
@@ -26,7 +28,7 @@ const AddList = ({ list_title, addList }) => {
     });
 
     const handleInputChange = (e) => {
-        setFormData({ ...formData, list_title: e.target.value });
+        setFormData({ ...formData, list_title: e.target.value, order: order });
     };
 
     const closeForm = () => {
@@ -68,7 +70,7 @@ const AddList = ({ list_title, addList }) => {
     const handleAddList = () => {
         if (formData.list_title) {
 
-            addList(formData.list_title);
+            addList(formData.list_title, order + 10);
             closeForm();
         }
         return;

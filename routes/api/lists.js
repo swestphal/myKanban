@@ -18,10 +18,13 @@ router.post(
     async (req, res) => {
 
         try {
-
+            console.log(req)
             const newList = new List({
                 list_title: req.body.list_title,
+                order: req.body.order
             });
+
+
 
             const list = await newList.save();
 

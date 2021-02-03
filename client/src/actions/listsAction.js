@@ -2,8 +2,8 @@ import axios from 'axios';
 import { CONSTANTS } from '.';
 
 
-export const addList = (list_title) => async dispatch => {
-
+export const addList = (list_title, order) => async dispatch => {
+    console.log(order)
     try {
 
         const config = {
@@ -12,7 +12,9 @@ export const addList = (list_title) => async dispatch => {
             },
         };
 
-        const body = JSON.stringify({ list_title });
+
+
+        const body = JSON.stringify({ list_title, order });
 
         const res = await axios.post('/api/lists', body, config);
 
