@@ -16,19 +16,10 @@ const styles = {
 };
 const Board = (props) => {
 
-    const [highestList, setHighestList] = useState(10)
 
     useEffect(() => {
         props.getLists();
-        // find highest order number of list
-        if (!props.lists.loading) {
-            const highest = (props.lists.lists).reduce((highVal, currVal) => {
-                if (currVal.order > highVal.order) return currVal;
-                else return highVal
-            })
-            setHighestList(highest.order)
 
-        }
     }, [getLists]);
 
     const onDragEnd = (result) => {
@@ -80,7 +71,7 @@ const Board = (props) => {
                                         )
                                     })}
                                     {provided.placeholder}
-                                    <AddList list order={highestList} />
+                                    <AddList list />
                                 </div>
                             )}
                         </Droppable>

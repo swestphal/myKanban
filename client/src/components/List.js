@@ -5,7 +5,8 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import SingleList from '../styles/List.styles'
 
 
-const List = ({ list_title, cards, listID, index, ...rest }) => {
+const List = ({ list_title, order, cards, listID, index, ...rest }) => {
+    console.log(order)
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {(provided) => (

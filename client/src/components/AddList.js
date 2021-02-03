@@ -15,7 +15,10 @@ const styles = {
 };
 
 
-const AddList = ({ list_title, order, addList }) => {
+const AddList = ({ list_title, addList, lists }) => {
+    // find highest order number of list
+
+
 
     const initialState = {
         formOpen: false,
@@ -28,7 +31,7 @@ const AddList = ({ list_title, order, addList }) => {
     });
 
     const handleInputChange = (e) => {
-        setFormData({ ...formData, list_title: e.target.value, order: order });
+        setFormData({ ...formData, list_title: e.target.value });
     };
 
     const closeForm = () => {
@@ -69,7 +72,12 @@ const AddList = ({ list_title, order, addList }) => {
     const handleAddList = () => {
         if (formData.list_title) {
 
-            addList(formData.list_title, order + 10);
+            const highest = (lists.lists).reduce((highVal, currVal) => {
+                if (currVal.order > highVal.order) return currVal;
+                else return highVal
+            })
+
+            addList(formData.list_title, highest.order + 10);
             closeForm();
         }
         return;
@@ -95,6 +103,7 @@ AddList.propTypes = {
 }
 const mapStateToProps = (state) => ({
     list_title: state.list_title,
+    lists: state.lists
 });
 
 export default connect(mapStateToProps, { addList })(AddList);
