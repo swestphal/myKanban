@@ -13,11 +13,10 @@ const BoardSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  listIds: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'list'
-    }]
+  order: {
+    type: Number,
+    default: 0,
+  }
 });
 
 module.exports = mongoose.model('board', BoardSchema);
