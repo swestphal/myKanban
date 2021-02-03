@@ -12,7 +12,12 @@ const BoardSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  listIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'list'
+    }]
 });
 
 module.exports = mongoose.model('board', BoardSchema);
