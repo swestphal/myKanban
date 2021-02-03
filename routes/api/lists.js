@@ -55,6 +55,9 @@ router.get('/', auth, async (req, res) => {
 // @desc    Edit single list
 // @access  Private
 
+// TODO save new list order of list 1 and list 2
+
+
 
 
 // @route   DELETE api/lists/:id
