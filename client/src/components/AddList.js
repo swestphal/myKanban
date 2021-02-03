@@ -16,7 +16,7 @@ const styles = {
 
 
 const AddList = ({ list_title, order, addList }) => {
-    console.log(order)
+
     const initialState = {
         formOpen: false,
         list_title: '',
@@ -36,7 +36,6 @@ const AddList = ({ list_title, order, addList }) => {
     };
 
     const openForm = () => {
-        console.log("open")
         setFormData({ formOpen: true });
     };
 

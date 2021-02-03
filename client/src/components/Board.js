@@ -20,7 +20,6 @@ const Board = (props) => {
 
     useEffect(() => {
         props.getLists();
-        console.log(props.lists.loading)
         // find highest order number of list
         if (!props.lists.loading) {
             const highest = (props.lists.lists).reduce((highVal, currVal) => {
@@ -33,7 +32,6 @@ const Board = (props) => {
     }, [getLists]);
 
     const onDragEnd = (result) => {
-        console.log("dragend")
         const { destination, source, draggableId, type } = result;
         if (!destination) {
             return;

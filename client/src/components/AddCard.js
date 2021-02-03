@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import CardForm from '../styles/CardForm.styles'
 
 const AddCard = ({ addCard, listID }) => {
-    console.log(listID)
     const initialState = {
         formOpen: false,
         title: 'g',
@@ -24,7 +23,7 @@ const AddCard = ({ addCard, listID }) => {
     };
 
     const openForm = () => {
-        console.log("open")
+
         setFormData({ formOpen: true });
     };
 
