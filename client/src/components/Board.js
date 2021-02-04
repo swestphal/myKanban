@@ -67,6 +67,7 @@ const Board = (props) => {
                                                 list_title={list.list_title}
                                                 cards={list.cards}
                                                 index={index}
+                                                order={list.order}
                                             />
                                         )
                                     })}

@@ -5,14 +5,15 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import SingleList from '../styles/List.styles'
 
 
-const List = ({ list_title, order, cards, listID, index, ...rest }) => {
+const List = ({ list_title, order, cards, listID, index }) => {
     console.log(order)
     return (
-        <Draggable draggableId={String(listID)} index={index}>
+        <Draggable draggableId={String(listID)} index={order}>
             {(provided) => (
                 <div
-                    {...provided.draggableProps}
+
                     ref={provided.innerRef}
+                    {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
                     <SingleList>
@@ -22,7 +23,7 @@ const List = ({ list_title, order, cards, listID, index, ...rest }) => {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    <h3 className="colouredBorder" data-colour={parseInt((listID.split('-')[1]) % 5)}>{list_title}</h3>
+                                    <h3 className="colouredBorder" data-colour={parseInt(index) % 5}>{list_title} - {listID}</h3>
                                     {cards && cards.map((card, index) => (
                                         <Card
                                             listID={listID}
@@ -42,8 +43,9 @@ const List = ({ list_title, order, cards, listID, index, ...rest }) => {
                         </Droppable>
                     </SingleList>
                 </div>
-            )}
-        </Draggable>
+            )
+            }
+        </Draggable >
     );
 };
 
