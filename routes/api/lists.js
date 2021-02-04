@@ -57,7 +57,28 @@ router.get('/', auth, async (req, res) => {
 
 // TODO save new list order of list 1 and list 2
 
-
+router.put('/', auth, async (req, res) => {
+    console.log("----------------------");
+    console.log(req.body);
+    console.log("----------------------");
+    const myQuery = {
+        '_id': '601af72f087465227b2df655'
+    }
+    const newVal = {
+        $set: {
+            order: 100
+        }
+    }
+    try {
+        const lists = await List.updateOne(myQuery, newVal)
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectID') {
+            return res.status(404).json({ msg: 'Post not found' });
+        }
+        res.status(500).send('Server error');
+    }
+});
 
 
 // @route   DELETE api/lists/:id

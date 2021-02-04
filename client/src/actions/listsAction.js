@@ -12,10 +12,7 @@ export const addList = (list_title, order) => async dispatch => {
             },
         };
 
-
-
         const body = JSON.stringify({ list_title, order });
-
         const res = await axios.post('/api/lists', body, config);
 
         dispatch({
@@ -68,16 +65,41 @@ export const sort = (
     draggableId,
     type
 ) => {
-
-    return {
-        type: CONSTANTS.DRAG_FINISHED,
-        payload: {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const body = JSON.stringify({
             droppableIdStart,
             droppableIdEnd,
             droppableIndexStart,
             droppableIndexEnd,
             draggableId,
             type,
-        },
-    };
+        });
+        axios.put('/api/lists', body, config);
+
+        return ({
+            type: CONSTANTS.DRAG_FINISHED,
+            payload: {
+                droppableIdStart,
+                droppableIdEnd,
+                droppableIndexStart,
+                droppableIndexEnd,
+                draggableId,
+                type,
+            },
+        });
+    } catch (err) {
+
+        return ({
+            type: CONSTANTS.ERROR_PROFILE,
+            payload: {
+                msg: err,
+                status: err,
+            },
+        });
+    }
 };

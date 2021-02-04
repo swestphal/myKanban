@@ -60,7 +60,7 @@ const listsReducer = (state = initialState, action) => {
                 draggableId,
                 type,
             } = action.payload;
-
+            console.log(action.payload)
             //const newState = [...state];
 
             const newState = { ...state };
