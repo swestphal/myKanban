@@ -3,7 +3,7 @@ import { CONSTANTS } from '.';
 
 
 export const addList = (list_title, order) => async dispatch => {
-    console.log(order)
+
     try {
 
         const config = {

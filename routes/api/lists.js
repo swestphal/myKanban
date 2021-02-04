@@ -30,7 +30,7 @@ router.post(
 
             res.json(list);
         } catch (err) {
-            console.error(err.message);
+
             res.status(500).send('Server Error');
         }
     }
@@ -43,7 +43,7 @@ router.post(
 
 router.get('/', auth, async (req, res) => {
     try {
-        const lists = await List.find().sort({ date: -1 });
+        const lists = await List.find().sort({ order: 1 });
         res.json(lists);
     } catch (err) {
         console.error(err.message);
