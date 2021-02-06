@@ -130,7 +130,7 @@ export const sort = (
             },
         })
     } catch (err) {
-
+        console.log("error")
         return ({
             type: CONSTANTS.ERROR_PROFILE,
             payload: {
