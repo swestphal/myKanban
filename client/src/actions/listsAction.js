@@ -57,20 +57,52 @@ export const getLists = () => async (dispatch) => {
     }
 };
 
+
+// TODO move logic out from here!
 export const sort = (
     droppableIdStart,
     droppableIdEnd,
     droppableIndexStart,
     droppableIndexEnd,
     draggableId,
-    type
+    type,
+    lists
 ) => {
     try {
+        console.log(
+            droppableIdStart,
+            droppableIdEnd,
+            droppableIndexStart,
+            droppableIndexEnd,
+            draggableId,
+            type,
+            lists)
         const config = {
             headers: {
                 'Content-Type': 'application/json',
             },
         };
+
+        const id = draggableId.split('-')[1]
+
+        let droppableIndexEndOrder = 0;
+        if (droppableIndexEnd > 0) {
+            droppableIndexEndOrder = lists[droppableIndexEnd - 1].order
+        }
+
+        let droppableIndexEndNextOrder = lists[lists.length - 1].order + 100;
+        let order
+
+        if (droppableIndexEnd < lists.length - 1) {
+            droppableIndexEndNextOrder = lists[droppableIndexEnd].order
+            if (droppableIndexEnd > droppableIndexStart) {
+                order = Math.floor(droppableIndexEndNextOrder + ((droppableIndexEndNextOrder - droppableIndexEndOrder) / 2))
+            } else {
+                order = Math.floor(droppableIndexEndOrder + ((droppableIndexEndNextOrder - droppableIndexEndOrder) / 2))
+            }
+        } else {
+            order = droppableIndexEndNextOrder
+        }
         const body = JSON.stringify({
             droppableIdStart,
             droppableIdEnd,
@@ -78,7 +110,10 @@ export const sort = (
             droppableIndexEnd,
             draggableId,
             type,
+            id,
+            order
         });
+
         axios.put('/api/lists', body, config);
 
         return ({
@@ -90,6 +125,8 @@ export const sort = (
                 droppableIndexEnd,
                 draggableId,
                 type,
+                id,
+                order
             },
         });
     } catch (err) {

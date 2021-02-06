@@ -34,8 +34,8 @@ const Board = (props) => {
             source.index,
             destination.index,
             draggableId,
-            type
-
+            type,
+            props.lists.lists
         );
     };
 

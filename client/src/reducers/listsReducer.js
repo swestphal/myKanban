@@ -59,6 +59,7 @@ const listsReducer = (state = initialState, action) => {
                 droppableIndexEnd,
                 draggableId,
                 type,
+                order
             } = action.payload;
             console.log(action.payload)
             //const newState = [...state];
@@ -67,8 +68,8 @@ const listsReducer = (state = initialState, action) => {
             // dragging lists
             if (type === 'list') {
                 const list = newState.lists.splice(droppableIndexStart, 1);
+                list.order = order
                 newState.lists.splice(droppableIndexEnd, 0, ...list);
-                // TODO save to database
                 return newState;
             }
             if (droppableIdStart === droppableIdEnd) {

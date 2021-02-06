@@ -8,7 +8,7 @@ import SingleList from '../styles/List.styles'
 const List = ({ list_title, order, cards, listID, index }) => {
     console.log(order)
     return (
-        <Draggable draggableId={String(listID)} index={order}>
+        <Draggable draggableId={String(listID)} index={index} >
             {(provided) => (
                 <div
 
