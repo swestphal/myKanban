@@ -1,5 +1,0 @@
-{
-    "mongoURI" :"mongodb+srv://swestphal:MarieClematis@cluster0.09ilb.mongodb.net/mykanban?retryWrites=true&w=majority",
-    "jwtSecret":"mySecretToken",
-    "githubToken":"fdcb083c58c5946143c2cb74bbd78a7876b5eb1f"
-}
