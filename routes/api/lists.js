@@ -43,7 +43,8 @@ router.post(
 
 router.get('/', auth, async (req, res) => {
     try {
-        const lists = await List.find().sort({ order: 1 });
+        const lists = await List.find({}, null, { sort: { order: 1 } })
+        console.log(lists)
         res.json(lists);
     } catch (err) {
         console.error(err.message);
@@ -61,16 +62,19 @@ router.put('/', auth, async (req, res) => {
     console.log("----------------------");
     console.log(req.body);
     console.log("----------------------");
+
+
     const myQuery = {
-        '_id': '601af72f087465227b2df655'
+        '_id': req.body.id,
     }
     const newVal = {
         $set: {
-            order: 100
+            order: req.body.order
         }
     }
     try {
-        const lists = await List.updateOne(myQuery, newVal)
+        const list = await List.updateOne(myQuery, newVal)
+        res.json(list);
     } catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectID') {

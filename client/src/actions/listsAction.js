@@ -68,54 +68,54 @@ export const sort = (
     type,
     lists
 ) => {
-    try {
-        console.log(
-            droppableIdStart,
-            droppableIdEnd,
-            droppableIndexStart,
-            droppableIndexEnd,
-            draggableId,
-            type,
-            lists)
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
 
-        const id = draggableId.split('-')[1]
+    console.log(
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type,
+        lists)
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
 
-        let droppableIndexEndOrder = 0;
-        if (droppableIndexEnd > 0) {
-            droppableIndexEndOrder = lists[droppableIndexEnd - 1].order
-        }
+    const id = draggableId.split('-')[1]
 
-        let droppableIndexEndNextOrder = lists[lists.length - 1].order + 100;
-        let order
+    let droppableIndexEndOrder = 0;
+    if (droppableIndexEnd > 0) {
+        droppableIndexEndOrder = lists[droppableIndexEnd - 1].order
+    }
 
-        if (droppableIndexEnd < lists.length - 1) {
-            droppableIndexEndNextOrder = lists[droppableIndexEnd].order
-            if (droppableIndexEnd > droppableIndexStart) {
-                order = Math.floor(droppableIndexEndNextOrder + ((droppableIndexEndNextOrder - droppableIndexEndOrder) / 2))
-            } else {
-                order = Math.floor(droppableIndexEndOrder + ((droppableIndexEndNextOrder - droppableIndexEndOrder) / 2))
-            }
+    let droppableIndexEndNextOrder = lists[lists.length - 1].order + 100;
+    let order = 0;
+
+    if (droppableIndexEnd < lists.length - 1) {
+        droppableIndexEndNextOrder = lists[droppableIndexEnd].order
+        if (droppableIndexEnd > droppableIndexStart) {
+            order = Math.floor(droppableIndexEndNextOrder + ((droppableIndexEndNextOrder - droppableIndexEndOrder) / 2))
         } else {
-            order = droppableIndexEndNextOrder
+            order = Math.floor(droppableIndexEndOrder + ((droppableIndexEndNextOrder - droppableIndexEndOrder) / 2))
         }
-        const body = JSON.stringify({
-            droppableIdStart,
-            droppableIdEnd,
-            droppableIndexStart,
-            droppableIndexEnd,
-            draggableId,
-            type,
-            id,
-            order
-        });
+    } else {
+        order = droppableIndexEndNextOrder
+    }
+    const body = JSON.stringify({
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type,
+        id,
+        order,
 
+    });
+    try {
         axios.put('/api/lists', body, config);
-
         return ({
             type: CONSTANTS.DRAG_FINISHED,
             payload: {
@@ -128,7 +128,7 @@ export const sort = (
                 id,
                 order
             },
-        });
+        })
     } catch (err) {
 
         return ({
@@ -138,5 +138,8 @@ export const sort = (
                 status: err,
             },
         });
+
+
     }
+
 };

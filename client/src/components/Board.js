@@ -35,7 +35,8 @@ const Board = (props) => {
             destination.index,
             draggableId,
             type,
-            props.lists.lists
+            props.lists.lists,
+
         );
     };
 
@@ -67,7 +68,7 @@ const Board = (props) => {
                                                 list_title={list.list_title}
                                                 cards={list.cards}
                                                 index={index}
-                                                order={list.order}
+
                                             />
                                         )
                                     })}

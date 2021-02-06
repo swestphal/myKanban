@@ -77,7 +77,7 @@ const AddList = ({ list_title, addList, lists }) => {
                 else return highVal
             })
 
-            addList(formData.list_title, highest.order + 10);
+            addList(formData.list_title, highest.order + 100);
             closeForm();
         }
         return;

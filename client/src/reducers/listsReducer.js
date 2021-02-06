@@ -70,6 +70,7 @@ const listsReducer = (state = initialState, action) => {
                 const list = newState.lists.splice(droppableIndexStart, 1);
                 list.order = order
                 newState.lists.splice(droppableIndexEnd, 0, ...list);
+                console.log(newState)
                 return newState;
             }
             if (droppableIdStart === droppableIdEnd) {
