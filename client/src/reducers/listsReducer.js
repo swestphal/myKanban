@@ -10,7 +10,8 @@ const initialState = {
 };
 
 const listsReducer = (state = initialState, action) => {
-
+    console.log(state)
+    console.log(action.payload)
     switch (action.type) {
         case CONSTANTS.ADD_LIST:
             listID = action.payload._id;
@@ -39,7 +40,8 @@ const listsReducer = (state = initialState, action) => {
                 text: action.payload.formData.text,
                 id: `card-${cardID}`,
             };
-            const newState = state.map((list) => {
+            const newState = state.lists.map((list) => {
+
                 if (list.id === action.payload.listID) {
                     return {
                         ...list,

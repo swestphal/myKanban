@@ -66,7 +66,6 @@ const AddCard = ({ addCard, listID }) => {
         if (formData) {
 
             if (formData.text && formData.title) {
-
                 addCard(listID, formData);
                 closeForm();
             }
