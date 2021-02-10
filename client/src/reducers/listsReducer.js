@@ -70,10 +70,11 @@ const listsReducer = (state = initialState, action) => {
             if (type === 'list') {
                 const list = newState.lists.splice(droppableIndexStart, 1);
                 list[0].order = order
-                console.log(list[0].list_title)
                 newState.lists.splice(droppableIndexEnd, 0, ...list);
                 return newState;
             }
+
+            // dragging cards
             if (droppableIdStart === droppableIdEnd) {
                 // if same list
                 const list = state.find((list) => droppableIdStart === list.id);

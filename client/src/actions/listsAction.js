@@ -69,14 +69,6 @@ export const sort = (
     lists
 ) => {
 
-    console.log(
-        droppableIdStart,
-        droppableIdEnd,
-        droppableIndexStart,
-        droppableIndexEnd,
-        draggableId,
-        type,
-        lists)
     const config = {
         headers: {
             'Content-Type': 'application/json',
