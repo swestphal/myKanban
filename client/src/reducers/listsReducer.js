@@ -10,8 +10,7 @@ const initialState = {
 };
 
 const listsReducer = (state = initialState, action) => {
-    console.log(state)
-    console.log(action.payload)
+
     switch (action.type) {
         case CONSTANTS.ADD_LIST:
             listID = action.payload._id;
@@ -65,9 +64,8 @@ const listsReducer = (state = initialState, action) => {
                 order
             } = action.payload;
 
-            //const newState = [...state];
 
-            const newState = { ...state };
+            const newState = [...state];
             // dragging lists
             if (type === 'list') {
                 const list = newState.lists.splice(droppableIndexStart, 1);
