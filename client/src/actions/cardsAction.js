@@ -14,7 +14,7 @@ export const addCard = (listID, formData) => async dispatch => {
         const id = listID.split('-')[1]
         const body = JSON.stringify({ listID, formData, id });
         const res = await axios.post('/api/cards', body, config);
-        console.log(res);
+        console.log(res.data);
         dispatch({
             type: CONSTANTS.ADD_CARD,
             payload: res.data,
@@ -22,7 +22,7 @@ export const addCard = (listID, formData) => async dispatch => {
 
 
     } catch (err) {
-
+        console.log(err)
         dispatch({
             type: CONSTANTS.ERROR_PROFILE,
             payload: {

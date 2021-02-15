@@ -33,26 +33,32 @@ const listsReducer = (state = initialState, action) => {
             };
 
         case CONSTANTS.ADD_CARD: {
-            cardID += 1;
-            console.log(action.payload)
+
+            cardID = action.payload._id;
+
             const newCard = {
                 title: action.payload.card_title,
                 text: action.payload.card_text,
-                id: `${cardID}`,
+                _id: `${cardID}`,
             };
             console.log(newCard)
+            console.log(state)
             const newState = state.lists.map((list) => {
-                console.log(list)
-                console.log(action.payload._list)
+
                 if (list._id === action.payload._list) {
-                    return {
+                    console.log(list)
+                    //todo .. keep old cards with spread operator!
+                    const ret = {
                         ...list,
-                        cards: [...list.cards, newCard],
+                        cards: [newCard],
                     };
+                    console.log(ret)
+                    return ret
                 } else {
                     return list;
                 }
             });
+
             return newState;
         }
         case CONSTANTS.DRAG_FINISHED:
