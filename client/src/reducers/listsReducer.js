@@ -34,15 +34,17 @@ const listsReducer = (state = initialState, action) => {
 
         case CONSTANTS.ADD_CARD: {
             cardID += 1;
-
+            console.log(action.payload)
             const newCard = {
-                title: action.payload.formData.title,
-                text: action.payload.formData.text,
-                id: `card-${cardID}`,
+                title: action.payload.card_title,
+                text: action.payload.card_text,
+                id: `${cardID}`,
             };
+            console.log(newCard)
             const newState = state.lists.map((list) => {
-
-                if (list.id === action.payload.listID) {
+                console.log(list)
+                console.log(action.payload._list)
+                if (list._id === action.payload._list) {
                     return {
                         ...list,
                         cards: [...list.cards, newCard],
