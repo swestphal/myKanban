@@ -23,6 +23,7 @@ const Board = (props) => {
     }, [getLists]);
 
     const onDragEnd = (result) => {
+        console.log(result)
         const { destination, source, draggableId, type } = result;
         if (!destination) {
             return;
@@ -59,7 +60,7 @@ const Board = (props) => {
                                     ref={provided.innerRef}
                                 >
                                     {props.lists.lists.map((list, index) => {
-
+                                        console.log(list)
                                         return (
 
                                             < List

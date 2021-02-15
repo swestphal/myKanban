@@ -58,7 +58,7 @@ export const getLists = () => async (dispatch) => {
 };
 
 
-// TODO move logic out from here!
+
 export const sort = (
     droppableIdStart,
     droppableIdEnd,
@@ -68,7 +68,7 @@ export const sort = (
     type,
     lists
 ) => {
-
+    console.log("action")
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export const sort = (
             },
         })
     } catch (err) {
-        console.log("error")
+
         return ({
             type: CONSTANTS.ERROR_PROFILE,
             payload: {

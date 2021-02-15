@@ -10,14 +10,15 @@ const initialState = {
 };
 
 const listsReducer = (state = initialState, action) => {
-
+    console.log(action.payload)
     switch (action.type) {
         case CONSTANTS.ADD_LIST:
             listID = action.payload._id;
             const newList = {
                 list_title: action.payload.list_title,
                 cards: [],
-                id: `list-${listID}`,
+                _id: `${listID}`,
+                order: action.payload.order
             };
             return {
                 ...state,
@@ -65,9 +66,11 @@ const listsReducer = (state = initialState, action) => {
             } = action.payload;
 
 
-            const newState = [...state];
+            const newState = { ...state };
+            console.log(newState)
             // dragging lists
             if (type === 'list') {
+                console.log("listreducer")
                 const list = newState.lists.splice(droppableIndexStart, 1);
                 list[0].order = order
                 newState.lists.splice(droppableIndexEnd, 0, ...list);
