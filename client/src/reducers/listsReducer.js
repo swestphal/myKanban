@@ -16,7 +16,7 @@ const listsReducer = (state = initialState, action) => {
             listID = action.payload._id;
             const newList = {
                 list_title: action.payload.list_title,
-                cards: [],
+                cards: [{ text: "vhvh" }],
                 _id: `${listID}`,
                 order: action.payload.order
             };
@@ -43,7 +43,7 @@ const listsReducer = (state = initialState, action) => {
             };
             console.log(newCard)
             console.log(state)
-            const newState = state.lists.map((list) => {
+            /*const newLists = state.lists.map((list) => {
 
                 if (list._id === action.payload._list) {
                     console.log(list)
@@ -52,14 +52,28 @@ const listsReducer = (state = initialState, action) => {
                         ...list,
                         cards: [newCard],
                     };
-                    console.log(ret)
+
                     return ret
                 } else {
-                    return list;
+                    return {
+                        ...list,
+                        cards: [],
+                    };
                 }
-            });
+            });*/
+            const index = state.lists.findIndex((list) => list._id === action.payload._list)
+            console.log(index);
+            const lists = [...state.lists]
+            console.log(lists[index])
 
-            return newState;
+
+            const ret = {
+                ...state,
+                lists
+            };
+            console.log(ret)
+            return ret
+
         }
         case CONSTANTS.DRAG_FINISHED:
             const {

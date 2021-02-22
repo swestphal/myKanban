@@ -44,6 +44,7 @@ const Board = (props) => {
     return (
         <div>
             {props.lists.loading ? (<p>nix</p>) : (
+
                 <><NavBar />
                     <DragDropContext onDragEnd={onDragEnd}>
 
@@ -58,7 +59,7 @@ const Board = (props) => {
                                     style={styles.board}
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
-                                >
+                                > {console.log(props.lists)}
                                     {props.lists.lists.map((list, index) => {
                                         console.log(list)
                                         return (
@@ -80,8 +81,9 @@ const Board = (props) => {
                         </Droppable>
 
                     </DragDropContext>
-                </>)}
-        </div>
+                </>)
+            }
+        </div >
     );
 };
 

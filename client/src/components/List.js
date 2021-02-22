@@ -23,9 +23,12 @@ const List = ({ list_title, cards, listID, index }) => {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
+
                                     <h3 className="colouredBorder" data-colour={parseInt(index) % 5}>{list_title}</h3>
+                                    {  console.log(cards)}
                                     {cards && cards.map((card, index) => (
-                                        <Card
+
+                                        < Card
                                             listID={listID}
                                             id={card.id}
                                             key={card.id}
