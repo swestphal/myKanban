@@ -41,10 +41,21 @@ router.post(
 // @desc    Get boards
 // @access  Private
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const lists = await List.find({}, null, { sort: { order: 1 } })
-        console.log(lists)
+        //const lists = await List.find({ "_id": { $in: card._list } }, null, { sort: { order: 1 } })
+        const lists = await List.aggregate([
+            {
+                $lookup:
+                {
+                    from: 'cards',
+                    localField: '_id',
+                    foreignField: '_list',
+                    as: 'cards'
+                }
+            }
+        ])
+        console.log(lists[1].cards)
         res.json(lists);
     } catch (err) {
         console.error(err.message);
