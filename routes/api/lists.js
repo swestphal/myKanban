@@ -52,10 +52,10 @@ router.get('/', async (req, res) => {
                     localField: '_id',
                     foreignField: '_list',
                     as: 'cards'
+
                 }
-            }
         ])
-        console.log(lists[1].cards)
+
         res.json(lists);
     } catch (err) {
         console.error(err.message);
